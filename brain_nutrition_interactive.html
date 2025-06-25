@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biochimie Nutritionnelle du Cerveau</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .section {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .interactive-element {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-element:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .interactive-element::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transition: all 0.5s ease;
+            transform: scale(0);
+        }
+
+        .interactive-element:hover::before {
+            transform: scale(1);
+        }
+
+        .brain-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .brain-svg {
+            width: 300px;
+            height: 200px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+        }
+
+        .brain-region {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .brain-region:hover {
+            filter: brightness(1.2);
+            transform: scale(1.05);
+        }
+
+        .metabolism-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .metabolism-card {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metabolism-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .metabolism-card h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .neurotransmitter-pathway {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .neurotransmitter-pathway:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+
+        .pathway-arrow {
+            font-size: 1.5rem;
+            color: #667eea;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .lipid-membrane {
+            position: relative;
+            height: 100px;
+            background: linear-gradient(to right, #ff9472, #f2709c);
+            border-radius: 50px;
+            margin: 20px 0;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lipid-membrane:hover {
+            transform: scaleY(1.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .lipid-molecule {
+            position: absolute;
+            width: 8px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 4px;
+            top: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .antioxidant-defense {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .antioxidant-item {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-weight: 600;
+        }
+
+        .antioxidant-item:hover {
+            transform: rotate(2deg) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .info-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            z-index: 1000;
+            max-width: 500px;
+            max-height: 70vh;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .info-popup.show {
+            display: block;
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .pathway-visualization {
+            position: relative;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .pathway-step {
+            display: inline-block;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            margin: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .pathway-step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .metabolism-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .brain-svg {
+                width: 250px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Biochimie Nutritionnelle du Cerveau</h1>
+            <p>Interface Interactive d'Exploration des Mécanismes Cérébraux</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn active" onclick="showSection('metabolism')">Métabolisme Énergétique</button>
+            <button class="nav-btn" onclick="showSection('neurotransmitters')">Neurotransmetteurs</button>
+            <button class="nav-btn" onclick="showSection('lipids')">Lipides Membranaires</button>
+            <button class="nav-btn" onclick="showSection('antioxidants')">Protection Antioxydante</button>
+        </div>
+
+        <!-- Section Métabolisme -->
+        <div id="metabolism" class="section active">
+            <h2>⚡ Métabolisme Énergétique Cérébral</h2>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">2%</div>
+                    <div class="stat-label">Poids corporel</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20%</div>
+                    <div class="stat-label">Énergie consommée</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">120g</div>
+                    <div class="stat-label">Glucose/jour</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">520</div>
+                    <div class="stat-label">kcal/jour</div>
+                </div>
+            </div>
+
+            <div class="metabolism-grid">
+                <div class="metabolism-card" onclick="showInfo('glucose')">
+                    <h3>🍯 Glucose - Carburant Principal</h3>
+                    <p>Transport via GLUT1, glycolyse → 36-38 ATP</p>
+                    <div class="pathway-visualization">
+                        <div class="pathway-step">Glucose sanguin</div>
+                        <div class="pathway-step">GLUT1</div>
+                        <div class="pathway-step">Glycolyse</div>
+                        <div class="pathway-step">ATP</div>
+                    </div>
+                </div>
+                
+                <div class="metabolism-card" onclick="showInfo('ketones')">
+                    <h3>🔥 Corps Cétoniques</h3>
+                    <p>Carburant alternatif, 22 ATP par β-hydroxybutyrate</p>
+                    <div class="pathway-visualization">
+                        <div class="pathway-step">Jeûne</div>
+                        <div class="pathway-step">β-hydroxybutyrate</div>
+                        <div class="pathway-step">MCT1</div>
+                        <div class="pathway-step">Neuroprotection</div>
+                    </div>
+                </div>
+                
+                <div class="metabolism-card" onclick="showInfo('micronutrients')">
+                    <h3>💊 Micronutriments</h3>
+                    <p>Cofacteurs essentiels pour l'efficacité métabolique</p>
+                    <div class="pathway-visualization">
+                        <div class="pathway-step">Thiamine B1</div>
+                        <div class="pathway-step">Magnésium</div>
+                        <div class="pathway-step">Fer</div>
+                        <div class="pathway-step">Vitamines B</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Neurotransmetteurs -->
+        <div id="neurotransmitters" class="section">
+            <h2>🧪 Neurotransmetteurs et Nutrition</h2>
+            
+            <div class="interactive-element" onclick="showInfo('dopamine')">
+                <h3>🎯 Système Dopaminergique</h3>
+                <div class="neurotransmitter-pathway">
+                    <span>Tyrosine</span>
+                    <span class="pathway-arrow">→</span>
+                    <span>L-DOPA</span>
+                    <span class="pathway-arrow">→</span>
+                    <span>Dopamine</span>
+                </div>
+                <p>Sources: Viandes, légumineuses, amandes, avocats</p>
+            </div>
+
+            <div class="interactive-element" onclick="showInfo('serotonin')">
+                <h3>😊 Système Sérotoninergique</h3>
+                <div class="neurotransmitter-pathway">
+                    <span>Tryptophane</span>
+                    <span class="pathway-arrow">→</span>
+                    <span>5-HTP</span>
+                    <span class="pathway-arrow">→</span>
+                    <span>Sérotonine</span>
+                </div>
+                <p>Paradoxe: repas glucidique favorise l'entrée cérébrale</p>
+            </div>
+
+            <div class="interactive-element" onclick="showInfo('noradrenaline')">
+                <h3>⚡ Système Catécholaminergique</h3>
+                <div class="neurotransmitter-pathway">
+                    <span>Dopamine</span>
+                    <span class="pathway-arrow">→</span>
+                    <span>Noradrénaline</span>
+                    <span class="pathway-arrow">→</span>
+                    <span>Adrénaline</span>
+                </div>
+                <p>Vitamine C cofacteur indispensable (100x dans surrénales)</p>
+            </div>
+
+            <div class="interactive-element" onclick="showInfo('acetylcholine')">
+                <h3>🧠 Système Cholinergique</h3>
+                <div class="neurotransmitter-pathway">
+                    <span>Choline</span>
+                    <span class="pathway-arrow">+</span>
+                    <span>Acétyl-CoA</span>
+                    <span class="pathway-arrow">→</span>
+                    <span>Acétylcholine</span>
+                </div>
+                <p>Sources: Œufs, viandes, légumineuses, noix</p>
+            </div>
+
+            <div class="interactive-element" onclick="showInfo('gaba')">
+                <h3>🌙 Système GABAergique</h3>
+                <div class="neurotransmitter-pathway">
+                    <span>Glutamate</span>
+                    <span class="pathway-arrow">→</span>
+                    <span>GABA</span>
+                    <span class="pathway-arrow">→</span>
+                    <span>Inhibition</span>
+                </div>
+                <p>Vitamine B6 cofacteur + Magnésium régulateur</p>
+            </div>
+        </div>
+
+        <!-- Section Lipides -->
+        <div id="lipids" class="section">
+            <h2>🧬 Lipides Membranaires et Développement</h2>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">60%</div>
+                    <div class="stat-label">Poids sec cerveau</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15-20%</div>
+                    <div class="stat-label">DHA cérébral</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">25%</div>
+                    <div class="stat-label">Volume myéline</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2:1</div>
+                    <div class="stat-label">Ratio ω-6/ω-3 optimal</div>
+                </div>
+            </div>
+
+            <div class="lipid-membrane" onclick="showInfo('membrane')">
+                <div class="lipid-molecule" style="left: 10%;"></div>
+                <div class="lipid-molecule" style="left: 25%; animation-delay: -1s;"></div>
+                <div class="lipid-molecule" style="left: 40%; animation-delay: -2s;"></div>
+                <div class="lipid-molecule" style="left: 55%; animation-delay: -0.5s;"></div>
+                <div class="lipid-molecule" style="left: 70%; animation-delay: -1.5s;"></div>
+                <div class="lipid-molecule" style="left: 85%; animation-delay: -2.5s;"></div>
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                    Membrane Neuronale Interactive
+                </div>
+            </div>
+
+            <div class="metabolism-grid">
+                <div class="metabolism-card" onclick="showInfo('dha')">
+                    <h3>🐟 DHA (Oméga-3)</h3>
+                    <p>Acide docosahexaénoïque - Fluidité membranaire</p>
+                    <div class="pathway-visualization">
+                        <div class="pathway-step">ALA</div>
+                        <div class="pathway-step">EPA</div>
+                        <div class="pathway-step">DHA</div>
+                        <div class="pathway-step">Neuroprotection</div>
+                    </div>
+                </div>
+                
+                <div class="metabolism-card" onclick="showInfo('myelin')">
+                    <h3>⚡ Myéline</h3>
+                    <p>Isolation électrique - Vitesse de conduction</p>
+                    <div class="pathway-visualization">
+                        <div class="pathway-step">Développement</div>
+                        <div class="pathway-step">0-2 ans</div>
+                        <div class="pathway-step">Maturation</div>
+                        <div class="pathway-step">Âge adulte</div>
+                    </div>
+                </div>
+                
+                <div class="metabolism-card" onclick="showInfo('phospholipids')">
+                    <h3>🧪 Phospholipides</h3>
+                    <p>Architecture membranaire complexe</p>
+                    <div class="pathway-visualization">
+                        <div class="pathway-step">PC 40-50%</div>
+                        <div class="pathway-step">PS 15-20%</div>
+                        <div class="pathway-step">PE 20-25%</div>
+                        <div class="pathway-step">Cardiolipides</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Antioxydants -->
+        <div id="antioxidants" class="section">
+            <h2>🛡️ Protection Antioxydante et Vieillissement</h2>
+            
+            <div class="interactive-element" onclick="showInfo('vulnerability')">
+                <h3>⚠️ Vulnérabilité Cérébrale</h3>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number">20%</div>
+                        <div class="stat-label">Consommation O₂</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2-5%</div>
+                        <div class="stat-label">O₂ → Radicaux</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="antioxidant-defense">
+                <div class="antioxidant-item" onclick="showInfo('sod')">
+                    <h4>SOD</h4>
+                    <p>Superoxyde dismutase</p>
+                    <small>Cu/Zn, Mn</small>
+                </div>
+                <div class="antioxidant-item" onclick="showInfo('glutathione')">
+                    <h4>Glutathion</h4>
+                    <p>Système GSH/GSSG</p>
+                    <small>Sélénium</small>
+                </div>
+                <div class="antioxidant-item" onclick="showInfo('vitaminc')">
+                    <h4>Vitamine C</h4>
+                    <p>10x concentration</p>
+                    <small>Transport SVCT2</small>
+                </div>
+                <div class="antioxidant-item" onclick="showInfo('vitamine')">
+                    <h4>Vitamine E</h4>
+                    <p>Membranes</p>
+                    <small>1 : 1000 AGPI</small>
+                </div>
+                <div class="antioxidant-item" onclick="showInfo('polyphenols')">
+                    <h4>Polyphénols</h4>
+                    <p>Flavonoïdes</p>
+                    <small>Resvératrol</small>
+                </div>
+                <div class="antioxidant-item" onclick="showInfo('mediterranean')">
+                    <h4>Régime Med.</h4>
+                    <p>Synergie</p>
+                    <small>Neuroprotection</small>
+                </div>
+            </div>
+
+            <div class="pathway-visualization">
+                <h3>🔄 Cascade Antioxydante</h3>
+                <div class="neurotransmitter-pathway">
+                    <span>O₂•⁻</span>
+                    <span class="pathway-arrow">SOD→</span>
+                    <span>H₂O₂</span>
+                    <span class="pathway-arrow">GPx→</span>
+                    <span>H₂O</span>
+                </div>
+                <div class="neurotransmitter-pathway">
+                    <span>GSH</span>
+                    <span class="pathway-arrow">↔</span>
+                    <span>GSSG</span>
+                    <span class="pathway-arrow">NADPH→</span>
+                    <span>Régénération</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup d'information -->
+    <div class="overlay" onclick="closeInfo()"></div>
+    <div class="info-popup" id="infoPopup">
+        <button class="close-btn" onclick="closeInfo()">×</button>
+        <div id="popupContent"></div>
+    </div>
+
+    <script>
+        // Données d'information détaillées
+        const infoData = {
+            glucose: {
+                title: "🍯 Métabolisme du Glucose",
+                content: `
+                    <h3>Glucose - Carburant Principal du Cerveau</h3>
+                    <p><strong>Transport:</strong> GLUT1 (haute affinité) dans les cellules endothéliales</p>
+                    <p><strong>Voies métaboliques:</strong></p>
+                    <ul>
+                        <li>Glycolyse → 36-38 ATP</li>
+                        <li>Voie des pentoses phosphates → NADPH (protection antioxydante)</li>
+                    </ul>
+                    <p><strong>Couplage neurovasculaire:</strong> Ajustement du débit sanguin selon l'activité neuronale</p>
+                    <p><strong>Rôle des astrocytes:</strong> Stockage de glycogène et mobilisation rapide</p>
+                    <p><strong>Besoins:</strong> 120-130g/jour (480-520 kcal)</p>
+                `
+            },
+            ketones: {
+                title: "🔥 Corps Cétoniques",
+                content: `
+                    <h3>Corps Cétoniques - Carburant Alternatif</h3>
+                    <p><strong>Conditions d'utilisation:</strong></p>
+                    <ul>
+                        <li>Jeûne prolongé</li>
+                        <li>Exercice intense</li>
+                        <li>Régimes cétogènes thérapeutiques</li>
+                    </ul>
+                    <p><strong>Avantages:</strong></p>
+                    <ul>
+                        <li>Rendement énergétique supérieur: 22 ATP/β-hydroxybutyrate</li>
+                        <li>Moins de radicaux libres que la glycolyse</li>
+                        <li>Effet neuroprotecteur potentiel</li>
+                    </ul>
+                    <p><strong>Transport:</strong> MCT1 (β-hydroxybutyrate et acétoacétate)</p>
+                `
+            },
+            micronutrients: {
+                title: "💊 Micronutriments Essentiels",
+                content: `
+                    <h3>Cofacteurs Métaboliques Cruciaux</h3>
+                    <p><strong>Thiamine (B1):</strong> Cofacteur pyruvate déshydrogénase</p>
+                    <p><strong>Magnésium:</strong> 300+ réactions enzymatiques</p>
+                    <p><strong>Fer:</strong> Transport O₂, chaîne respiratoire</p>
+                    <p><strong>Riboflavine (B2):</strong> Précurseur FAD</p>
+                    <p><strong>Niacine (B3):</strong> Précurseur NAD+</p>
+                    <p><strong>Pyridoxine (B6):</strong> Synthèse neurotransmetteurs</p>
+                    <p><em>Carences → Dysfonctions métaboliques graves</em></p>
+                `
+            },
+            dopamine: {
+                title: "🎯 Système Dopaminergique",
+                content: `
+                    <h3>Dopamine - Motivation et Récompense</h3>
+                    <p><strong>Voie de synthèse:</strong> Tyrosine → L-DOPA → Dopamine</p>
+                    <p><strong>Enzyme clé:</strong> Tyrosine hydroxylase (+ tétrahydrobioptérine + Fe²⁺)</p>
+                    <p><strong>Sources de tyrosine:</strong></p>
+                    <ul>
+                        <li>Produits animaux</li>
+                        <li>Légumineuses</li>
+                        <li>Amandes, avocats</li>
+                    </ul>
+                    <p><strong>Régulation nutritionnelle:</strong></p>
+                    <ul>
+                        <li>Compétition d'acides aminés pour LAT1</li>
+                        <li>Paradoxe: repas glucidique peut favoriser l'entrée</li>
+                    </ul>
+                `
+            },
+            serotonin: {
+                title: "😊 Système Sérotoninergique",
+                content: `
+                    <h3>Sérotonine - Humeur et Bien-être</h3>
+                    <p><strong>Voie de synthèse:</strong> Tryptophane → 5-HTP → Sérotonine</p>
+                    <p><strong>Enzymes:</strong> TPH (tryptophane hydroxylase) + AADC (+ B6)</p>
+                    <p><strong>Le "paradoxe du tryptophane":</strong></p>
+                    <ul>
+                        <li>Repas protéique: ↑ tryptophane mais ↑ compétition → ↓ disponibilité</li>
+                        <li>Repas glucidique: effet indirect positif via modulation AA</li>
+                    </ul>
+                    <p><strong>Implications:</strong> Effets "mood-food" des glucides complexes</p>
+                `
+            },
+            noradrenaline: {
+                title: "⚡ Système Catécholaminergique",
+                content: `
+                    <h3>Noradrénaline/Adrénaline - Éveil et Stress</h3>
+                    <p><strong>Voie:</strong> Dopamine → Noradrénaline → Adrénaline</p>
+                    <p><strong>Enzymes:</strong> DBH (+ Vit C) → PNMT (+ SAM)</p>
+                    <p><strong>Nutriments critiques:</strong></p>
+                    <ul>
+                        <li>Vitamine C: cofacteur indispensable (100x dans surrénales)</li>
+                        <li>Cycle de méthylation: B9, B12, B6 pour SAM</li>
+                    </ul>
+                `
+            },
+            acetylcholine: {
+                title: "🧠 Système Cholinergique",
+                content: `
+                    <h3>Acétylcholine - Mémoire et Attention</h3>
+                    <p><strong>Synthèse:</strong> Choline + Acétyl-CoA → Acétylcholine</p>
+                    <p><strong>Enzyme:</strong> Choline acétyltransférase</p>
+                    <p><strong>Importance fonctionnelle:</strong></p>
+                    <ul>
+                        <li>Transmission neuromusculaire</li>
+                        <li>Fonctions cognitives (attention, mémoire)</li>
+                        <li>Cible thérapeutique dans Alzheimer</li>
+                    </ul>
+                    <p><strong>Sources de choline:</strong> Œufs, viandes, poissons, légumineuses, noix</p>
+                `
+            },
+            gaba: {
+                title: "🌙 Système GABAergique",
+                content: `
+                    <h3>GABA - Inhibition et Relaxation</h3>
+                    <p><strong>Rôle:</strong> Équilibre excitation-inhibition</p>
+                    <p><strong>Synthèse:</strong> Glutamate → GABA (GAD + vitamine B6)</p>
+                    <p><strong>Modulation nutritionnelle:</strong></p>
+                    <ul>
+                        <li>Vitamine B6: cofacteur essentiel</li>
+                        <li>Magnésium: régulateur allostérique récepteurs GABA-A</li>
+                        <li>Taurine: modulation neurotransmission GABAergique</li>
+                    </ul>
+                `
+            },
+            membrane: {
+                title: "🧬 Architecture Membranaire",
+                content: `
+                    <h3>Membranes Neuronales - Structures Actives</h3>
+                    <p><strong>Composition phospholipidique:</strong></p>
+                    <ul>
+                        <li>Phosphatidylcholine (PC): 40-50% - Fluidité</li>
+                        <li>Phosphatidylsérine (PS): 15-20% - Signalisation</li>
+                        <li>Phosphatidyléthanolamine (PE): 20-25% - Courbure</li>
+                        <li>Cardiolipides: 5-10% - Efficacité mitochondriale</li>
+                    </ul>
+                    <p><strong>Fonction:</strong> Récepteurs, canaux, signalisation cellulaire</p>
+                `
+            },
+            dha: {
+                title: "🐟 DHA - Oméga-3 Cérébral",
+                content: `
+                    <h3>Acide Docosahexaénoïque</h3>
+                    <p><strong>Concentration:</strong> 15-20% des acides gras cérébraux</p>
+                    <p><strong>Localisation privilégiée:</strong> Synapses et rétine</p>
+                    <p><strong>Fonctions:</strong></p>
+                    <ul>
+                        <li>Modulation fluidité membranaire</li>
+                        <li>Activité récepteurs/canaux ioniques</li>
+                        <li>Précurseur médiateurs neuroprotecteurs (résolvines, protectines)</li>
+                    </ul>
+                    <p><strong>Période critique:</strong> 3ème trimestre grossesse + premiers mois</p>
+                    <p><strong>Métabolisme:</strong> ALA → EPA → DHA (conversion limitée <5%)</p>
+                `
+            },
+            myelin: {
+                title: "⚡ Myéline - Isolation Électrique",
+                content: `
+                    <h3>Structure Myélinique</h3>
+                    <p><strong>Composition:</strong> 25% du volume cérébral, 70-80% lipides</p>
+                    <p><strong>Fonction:</strong> Isolation électrique, ↑ vitesse conduction</p>
+                    <p><strong>Développement:</strong></p>
+                    <ul>
+                        <li>Début: in utero</li>
+                        <li>Pic activité: 2 premières années</li>
+                        <li>Durée: jusqu'à l'âge adulte</li>
+                    </ul>
+                    <p><strong>Nutriments essentiels:</strong> AGPI, cholestérol, vitamines liposolubles, B12</p>
+                `
+            },
+            phospholipids: {
+                title: "🧪 Phospholipides Membranaires",
+                content: `
+                    <h3>Architecture Complexe des Membranes</h3>
+                    <p><strong>Rôles spécialisés:</strong></p>
+                    <ul>
+                        <li>PC: Source choline, fluidité membranaire</li>
+                        <li>PS: Activation enzymatique, signalisation</li>
+                        <li>PE: Fusion vésiculaire, courbure membranaire</li>
+                        <li>Cardiolipides: Efficacité mitochondriale</li>
+                    </ul>
+                    <p><strong>Équilibre critique:</strong> Ratio oméga-6/oméga-3 (optimal 2:1 à 4:1)</p>
+                `
+            },
+            vulnerability: {
+                title: "⚠️ Vulnérabilité au Stress Oxydatif",
+                content: `
+                    <h3>Facteurs de Risque Cérébraux</h3>
+                    <p><strong>Caractéristiques:</strong></p>
+                    <ul>
+                        <li>Consommation élevée O₂ (20% du total)</li>
+                        <li>Richesse en AGPI (sensibles à peroxydation)</li>
+                        <li>Métaux de transition (Fe, Cu catalyseurs)</li>
+                        <li>Métabolisme intense (production ERO)</li>
+                    </ul>
+                    <p><strong>Sources d'ERO:</strong></p>
+                    <ul>
+                        <li>Chaîne respiratoire mitochondriale (2-5%)</li>
+                        <li>Métabolisme neurotransmetteurs (MAO → H₂O₂)</li>
+                        <li>Activation microgliale (NADPH oxydase)</li>
+                    </ul>
+                `
+            },
+            sod: {
+                title: "🛡️ Superoxyde Dismutase",
+                content: `
+                    <h3>Première Ligne de Défense</h3>
+                    <p><strong>Types:</strong></p>
+                    <ul>
+                        <li>SOD1 (Cu/Zn): Cytoplasme</li>
+                        <li>SOD2 (Mn): Mitochondrie</li>
+                        <li>SOD3 (Cu/Zn): Extracellulaire</li>
+                    </ul>
+                    <p><strong>Réaction:</strong> O₂•⁻ → H₂O₂</p>
+                    <p><strong>Cofacteurs:</strong> Cuivre, Zinc, Manganèse</p>
+                `
+            },
+            glutathione: {
+                title: "🔄 Système Glutathion",
+                content: `
+                    <h3>Antioxydant Maître</h3>
+                    <p><strong>Cycle:</strong></p>
+                    <ul>
+                        <li>GSH + H₂O₂ → GSSG + H₂O (GPx + Se)</li>
+                        <li>GSSG + NADPH → 2 GSH (GR + riboflavine)</li>
+                    </ul>
+                    <p><strong>Limitation:</strong> Disponibilité en cystéine (précurseur GSH)</p>
+                    <p><strong>Cofacteurs:</strong> Sélénium, riboflavine (B2)</p>
+                `
+            },
+            vitaminc: {
+                title: "🍊 Vitamine C Cérébrale",
+                content: `
+                    <h3>Antioxydant Hydrosoluble</h3>
+                    <p><strong>Concentration:</strong> 10x plasma (transport SVCT2)</p>
+                    <p><strong>Fonctions:</strong></p>
+                    <ul>
+                        <li>Antioxydant direct</li>
+                        <li>Régénération vitamine E</li>
+                        <li>Cofacteur synthèse catécholamines</li>
+                    </ul>
+                    <p><strong>Distribution:</strong> Concentrations très élevées dans les surrénales</p>
+                `
+            },
+            vitamine: {
+                title: "🌟 Vitamine E",
+                content: `
+                    <h3>Protecteur Membranaire</h3>
+                    <p><strong>α-tocophérol:</strong> Forme la plus active</p>
+                    <p><strong>Fonction:</strong> Interruption chaînes peroxydation lipidique</p>
+                    <p><strong>Efficacité:</strong> 1 molécule protège 1000 AGPI</p>
+                    <p><strong>Régénération:</strong> Par vitamine C (synergie)</p>
+                    <p><strong>Localisation:</strong> Membranes cellulaires</p>
+                `
+            },
+            polyphenols: {
+                title: "🍇 Polyphénols",
+                content: `
+                    <h3>Antioxydants Végétaux</h3>
+                    <p><strong>Types principaux:</strong></p>
+                    <ul>
+                        <li>Flavonoïdes: quercétine, catéchines, anthocyanes</li>
+                        <li>Resvératrol: activation sirtuines</li>
+                        <li>Curcumine: propriétés anti-amyloïdes</li>
+                    </ul>
+                    <p><strong>Sources:</strong> Fruits colorés, thé, vin rouge, épices</p>
+                `
+            },
+            mediterranean: {
+                title: "🫒 Régime Méditerranéen",
+                content: `
+                    <h3>Synergie Neuroprotectrice</h3>
+                    <p><strong>Composants protecteurs:</strong></p>
+                    <ul>
+                        <li>Fruits et légumes (antioxydants)</li>
+                        <li>Huile d'olive (AGMI)</li>
+                        <li>Poissons (oméga-3)</li>
+                        <li>Noix (polyphénols, vitamine E)</li>
+                        <li>Vin rouge modéré (resvératrol)</li>
+                    </ul>
+                    <p><strong>Stratégies complémentaires:</strong></p>
+                    <ul>
+                        <li>Restriction calorique (15-25%)</li>
+                        <li>Jeûne intermittent</li>
+                        <li>Régimes cétogènes thérapeutiques</li>
+                    </ul>
+                `
+            }
+        };
+
+        // Fonctions JavaScript
+        function showSection(sectionId) {
+            // Masquer toutes les sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Afficher la section sélectionnée
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Mettre à jour les boutons de navigation
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function showInfo(topic) {
+            const popup = document.getElementById('infoPopup');
+            const overlay = document.querySelector('.overlay');
+            const content = document.getElementById('popupContent');
+            
+            if (infoData[topic]) {
+                content.innerHTML = infoData[topic].content;
+                popup.classList.add('show');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeInfo() {
+            const popup = document.getElementById('infoPopup');
+            const overlay = document.querySelector('.overlay');
+            
+            popup.classList.remove('show');
+            overlay.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Animation des statistiques au chargement
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            statNumbers.forEach(stat => {
+                const finalValue = stat.textContent;
+                const isNumber = !isNaN(parseFloat(finalValue));
+                
+                if (isNumber) {
+                    const target = parseFloat(finalValue);
+                    let current = 0;
+                    const increment = target / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = Math.round(current) + (finalValue.includes('%') ? '%' : finalValue.includes('g') ? 'g' : '');
+                    }, 30);
+                }
+            });
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            animateStats();
+            
+            // Ajouter des effets visuels supplémentaires
+            const interactiveElements = document.querySelectorAll('.interactive-element, .metabolism-card, .antioxidant-item');
+            
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02) translateY(-2px)';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) translateY(0)';
+                });
+            });
+        });
+
+        // Gestion du clavier
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeInfo();
+            }
+        });
+
+        // Animation des flèches de pathways
+        setInterval(() => {
+            const arrows = document.querySelectorAll('.pathway-arrow');
+            arrows.forEach(arrow => {
+                arrow.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    arrow.style.transform = 'scale(1)';
+                }, 200);
+            });
+        }, 2000);
+    </script>
+</body>
+</html>
